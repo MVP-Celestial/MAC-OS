@@ -3,18 +3,19 @@
     padding: 0;
     box-sizing: border-box;
 }
-html , body, #root{
+
+html, body, #root {
     height: 100%;
     width: 100%;
 }
+
+
 
 main {
     height: 100%;
     width: 100%;
-
-    background-image: url();
-}
-
-body {
-    background-color: black;
+    background-image: url("/wallpaper.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
