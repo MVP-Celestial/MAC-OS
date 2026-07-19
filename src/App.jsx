@@ -2,7 +2,8 @@ import React from 'react'
 import '../src/app.scss'
 import Dock from './components/Dock'
 import Navbar from './components/Navbar'
-import Macwindow from './components/windows/Macwindow'
+import Github from './components/windows/Github'
+
 
 const App = () => {
   return (
@@ -13,9 +14,7 @@ const App = () => {
 
       <Navbar />
       <Dock />
-      <Macwindow>
-        <h1>HEYY</h1>
-      </Macwindow>
+      <Github />
     </main>
   )
 }
