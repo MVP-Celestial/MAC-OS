@@ -2,12 +2,12 @@ import React from 'react'
 import {Rnd} from 'react-rnd'
 import './macwindow.scss'
 
-const Macwindow = ({children}) => {
+const Macwindow = ({children, width="40vw", height="60vh"}) => {
   const maxWidth = typeof window !== 'undefined' ? Math.max(320, window.innerWidth - 24) : 700
 
   return (
     <Rnd
-      default={{ x: 654, y: 224, width: 700, height: 500 }}
+      default={{ x: 654, y: 224, width: width, height: height }}
       minWidth={320}
       maxWidth={maxWidth}
       minHeight={320}

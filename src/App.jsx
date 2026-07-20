@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import Github from './components/windows/Github'
 import { Note } from "./components/Note"
 import  Resume  from './components/windows/Resume'
+import Spotify from './components/windows/Spotify'
 
 const App = () => {
   return (
@@ -13,11 +14,12 @@ const App = () => {
         <source src="/cherry-blossom-lake-house-minecraft-moewalls-com.mp4" type="video/mp4" />
       </video>
 
-      <Navbar />
+      {/* <Navbar />
       <Dock />
       <Github />
       <Note />
-      <Resume />
+      <Resume /> */}
+      <Spotify/>
     </main>
   )
 }
