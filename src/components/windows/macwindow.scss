@@ -8,8 +8,8 @@
     color: white;
     display: flex;
     flex-direction: column;
-    scrollbar-width: thin;
-    
+
+
 }
 
 .nav {
@@ -66,5 +66,10 @@
     flex: 1;
     min-height: 0;
     overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 

@@ -3,7 +3,7 @@ import '../src/app.scss'
 import Dock from './components/Dock'
 import Navbar from './components/Navbar'
 import Github from './components/windows/Github'
-
+import { Note } from "./components/Note"
 
 const App = () => {
   return (
@@ -14,7 +14,8 @@ const App = () => {
 
       <Navbar />
       <Dock />
-      <Github />
+      {/* <Github /> */}
+      <Note />
     </main>
   )
 }
