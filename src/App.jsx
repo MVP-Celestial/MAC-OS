@@ -8,20 +8,32 @@ import  Resume  from './components/windows/Resume'
 import Spotify from './components/windows/Spotify'
 import Cli from './components/windows/Cli'
 
+import { useState } from 'react'
+
 const App = () => {
+
+  const [windows, setWindowsState] = useState({
+    github: false,
+    note: false,
+    resume: false,
+    spotify: false,
+    cli: false,
+  })
+
+
   return (
     <main>
       <video className="wallpaper" autoPlay muted loop playsInline>
         <source src="/cherry-blossom-lake-house-minecraft-moewalls-com.mp4" type="video/mp4" />
       </video>
 
-      {/* <Navbar />
-      <Dock />
-      <Github />
-      <Note />
-      <Resume /> */}
-      {/* <Spotify/> */}
-      <Cli/>
+       <Navbar />
+      <Dock windowsState={windows} setWindowsState={setWindowsState} />
+      {windows.github && <Github onClose={() => setWindowsState(s => ({...s, github: false}))} />}
+      {windows.note && <Note onClose={() => setWindowsState(s => ({...s, note: false}))} />}
+      {windows.resume && <Resume onClose={() => setWindowsState(s => ({...s, resume: false}))} />}
+      {windows.spotify && <Spotify onClose={() => setWindowsState(s => ({...s, spotify: false}))} />}
+      {windows.cli && <Cli onClose={() => setWindowsState(s => ({...s, cli: false}))} />}
     </main>
   )
 }

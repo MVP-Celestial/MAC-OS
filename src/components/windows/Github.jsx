@@ -77,10 +77,10 @@ const GitCard = ({ data = { id: 1, image: "", title: "", description: "", tags: 
 }
 
 
-const Github = () => {
+const Github = ({onClose}) => {
     return (
         <div>
-            <Macwindow>
+            <Macwindow onClose={onClose}>
                 <div className="cards">
                     {githubData.map(project => {
                         return <GitCard data={project} key={project.id} />

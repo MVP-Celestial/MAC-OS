@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import "./dock.scss"
 
+
 const MAX_SCALE = 1.5;
 const SIGMA = 60;
 const LERP = 0.2;
@@ -8,7 +9,7 @@ const SHIFT_LERP = 0.15;
 const LIFT = 18;
 const DISPLACEMENT = 0.5;
 
-const Dock = () => {
+const Dock = ({windowsState, setWindowsState}) => {
   const dockRef = useRef(null);   // the icon row (flex container)
   const bgRef = useRef(null);     // the translucent pill, absolutely positioned
   const iconRefs = useRef([]);
@@ -125,13 +126,28 @@ const Dock = () => {
     <div className="dock-wrapper">
       <div className="dock-bg" ref={bgRef}></div>
       <footer className='dock' ref={dockRef}>
-        <div className="icon github" ref={addIconRef}><img src="/doc-icons/github.svg" alt="" /></div>
-        <div className="icon note" ref={addIconRef}><img src="/doc-icons/note.svg" alt="" /></div>
-        <div className="icon pdf" ref={addIconRef}><img src="/doc-icons/pdf.svg" alt="" /></div>
-        <div className="icon calender" ref={addIconRef}><img src="/doc-icons/calender.svg" alt="" /></div>
-        <div className="icon spotify" ref={addIconRef}><img src="/doc-icons/spotify.svg" alt="" /></div>
-        <div className="icon mail" ref={addIconRef}><img src="/doc-icons/mail.svg" alt="" /></div>
-        <div className="icon cli" ref={addIconRef}><img src="/doc-icons/cli.svg" alt="" /></div>
+        <div
+        onClick={()=>{setWindowsState(state=>({...state, github:true}))}}
+        className="icon github" ref={addIconRef}><img src="/doc-icons/github.svg" alt="" /></div>
+        <div
+        onClick={()=>{setWindowsState(state=>({...state, note:true}))}}
+        className="icon note" ref={addIconRef}><img src="/doc-icons/note.svg" alt="" /></div>
+
+        <div
+        onClick={()=>{setWindowsState(state=>({...state, resume:true}))}}
+         className="icon pdf" ref={addIconRef}><img src="/doc-icons/pdf.svg" alt="" /></div>
+        <div
+        className="icon calender" ref={addIconRef}><img src="/doc-icons/calender.svg" alt="" /></div>
+        <div 
+        onClick={()=>{setWindowsState(state=>({...state, spotify:true}))}}
+         className="icon spotify" ref={addIconRef}><img src="/doc-icons/spotify.svg" alt="" /></div>
+
+        <div
+        onClick={()=>{setWindowsState(state=>({...state, mail:true}))}}
+        className="icon mail" ref={addIconRef}><img src="/doc-icons/mail.svg" alt="" /></div>
+        <div
+        onClick={()=>{setWindowsState(state=>({...state, cli:true}))}}
+         className="icon cli" ref={addIconRef}><img src="/doc-icons/cli.svg" alt="" /></div>
       </footer>
     </div>
   )

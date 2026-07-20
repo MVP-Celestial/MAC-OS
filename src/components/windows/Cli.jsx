@@ -2,6 +2,7 @@ import React from "react";
 import Macwindow from "./Macwindow";
 import "./cli.scss";
 import TerminalPkg from "react-console-emulator";
+import { getRandomAscii, welcomeAscii } from "../../data/asciiArt";
 
 const Terminal = TerminalPkg.default || TerminalPkg;
 
@@ -30,11 +31,15 @@ const commands = {
     description: "View my resume",
     fn: () => "Opening resume... check the Resume window!",
   },
+  ascii: {
+    description: "Generate a random ASCII art",
+    fn: () => getRandomAscii(),
+  },
 };
 
-const Cli = () => {
+const Cli = ({onClose}) => {
   return (
-    <Macwindow>
+    <Macwindow onClose={onClose}>
       <div className="cli-window">
         <Terminal
           commands={commands}
@@ -48,20 +53,10 @@ const Cli = () => {
             "  contact  - Get my contact info",
             "  socials  - Show my social links",
             "  resume   - View my resume",
+            "  ascii    - Random ASCII art",
             "  clear    - Clear the terminal",
             "",
-            "⠀⠀⠀⠀⠀⠀⠀⠀⣤⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
-            "⠀⢀⣄⠀⣠⠶⠲⠞⠁⠀⠙⠛⠳⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀",
-            "⡟⠙⠛⠁⣀⣀⢀⡤⢤⠀⠀⠀⠙⢷⣄⠀⠀⠀⠀⠀⠀⠀",
-            "⢠⡷⢄⣠⠊⠀⠀⠁⠀⡀⠑⠒⠈⢳⠀⢻⡆⠀⠀⠀⠀⠀⠀",
-            "⠀⣷⠃⢠⡀⠀⠀⠀⠀⠈⠀⠀⠀⢎⠀⢸⡇⠀⠀⠀⠀⠀⠀",
-            "⢠⡇⠀⠘⢁⡄⠀⠀⠉⠉⠀⠀⠀⣳⢧⣾⠃⠀⠀⠀⠀⠀⠀",
-            "⢸⡇⠀⠀⠘⠆⠀⠀⢀⠀⠀⠀⠀⠁⢿⡏⠀⠀⠀⠀⠀⠀⠀",
-            "⠈⣇⠸⢖⡀⠀⠐⣂⠹⡇⠀⠀⠀⣀⣼⠇⠀⠀⠀⠀⠀⠀⠀",
-            "⠀⠹⣦⠀⠈⠭⠉⠀⠀⠀⠀⣠⡾⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀",
-            "⠀⠀⠈⠳⢦⣄⣀⣀⣠⡴⠞⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
-            "⠀⠀⠀⠀⠀⠀⠈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
-            
+            ...welcomeAscii.split("\n"),
           ]}
           messageStyle={{ color: "#00ff00" }}
           promptLabel={"celestial:~$"}

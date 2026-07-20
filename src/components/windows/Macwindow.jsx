@@ -2,7 +2,7 @@ import React from 'react'
 import {Rnd} from 'react-rnd'
 import './macwindow.scss'
 
-const Macwindow = ({children, width="40vw", height="60vh"}) => {
+const Macwindow = ({children, width="40vw", height="60vh", onClose}) => {
   const maxWidth = typeof window !== 'undefined' ? Math.max(320, window.innerWidth - 24) : 700
 
   return (
@@ -16,7 +16,7 @@ const Macwindow = ({children, width="40vw", height="60vh"}) => {
         <div className="window">
             <div className="nav">
                 <div className="dots">
-                    <div className="dot red"></div>
+                    <div className="dot red" onClick={onClose}></div>
                     <div className="dot yellow"></div>
                     <div className="dot green"></div>
                 </div>
