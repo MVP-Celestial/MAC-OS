@@ -7,6 +7,8 @@ import { Note } from "./components/Note"
 import  Resume  from './components/windows/Resume'
 import Spotify from './components/windows/Spotify'
 import Cli from './components/windows/Cli'
+import MinecraftIntro from './components/MinecraftIntro'
+import './components/minecraft-intro.scss'
 
 import { useState } from 'react'
 
@@ -19,10 +21,12 @@ const App = () => {
     spotify: false,
     cli: false,
   })
+  const [showIntro, setShowIntro] = useState(true)
 
 
   return (
     <main>
+      {showIntro && <MinecraftIntro onComplete={() => setShowIntro(false)} />}
       <video className="wallpaper" autoPlay muted loop playsInline>
         <source src="/cherry-blossom-lake-house-minecraft-moewalls-com.mp4" type="video/mp4" />
       </video>

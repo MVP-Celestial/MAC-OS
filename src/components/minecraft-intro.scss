@@ -1,0 +1,92 @@
+.minecraft-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  overflow: hidden;
+  background: #111111f8;
+  pointer-events: none;
+  animation: intro-lift .72s cubic-bezier(.76, 0, .18, 1) 2.72s forwards;
+}
+
+.minecraft-intro__hint {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 7%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, .38);
+  font: 500 9px/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  animation: hint-pulse 1.6s ease-in-out .4s infinite;
+}
+
+@keyframes hint-pulse {
+  0%, 100% { opacity: .15; }
+  50% { opacity: .5; }
+}
+
+.minecraft-intro__shade {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(circle at 50% 48%, transparent 0%, rgba(0, 0, 0, .16) 72%, rgba(0, 0, 0, .5) 100%);
+  pointer-events: none;
+}
+
+.minecraft-intro__wall {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.minecraft-intro__block {
+  position: absolute;
+  background-position: center;
+  background-size: cover;
+  image-rendering: pixelated;
+  opacity: 0;
+  transform: scale(0);
+  animation: block-appear .42s cubic-bezier(.18, .85, .3, 1.25) var(--appear-delay) forwards,
+    block-reveal .2s cubic-bezier(.5, 0, .85, .25) var(--reveal-delay) forwards;
+  will-change: transform, opacity;
+}
+
+.minecraft-intro__mark {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 11%;
+  color: rgba(255, 255, 255, .62);
+  font: 600 10px/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
+  letter-spacing: .28em;
+  transform: translateX(-50%);
+  animation: mark-fade 1.5s ease 1.3s forwards;
+  opacity: 0;
+}
+
+@keyframes block-appear {
+  0% { opacity: 0; transform: scale(.18); }
+  70% { opacity: 1; transform: scale(1.06); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes block-reveal {
+  0% { opacity: 1; transform: scale(1) rotate(0); }
+  100% { opacity: 0; transform: scale(0) rotate(var(--rotation)); }
+}
+
+@keyframes mark-fade {
+  0%, 65% { opacity: 0; }
+  100% { opacity: .7; }
+}
+
+@keyframes intro-lift {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .minecraft-intro__block { animation-duration: .01ms; animation-delay: 0s; }
+  .minecraft-intro__mark { animation: none; opacity: .7; }
+}
