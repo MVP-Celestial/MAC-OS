@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Macwindow from "./Macwindow";
+import TerminalIntro from "./TerminalIntro";
 import "./cli.scss";
 import TerminalPkg from "react-console-emulator";
 import { getRandomAscii, welcomeAscii } from "../../data/asciiArt";
@@ -37,32 +39,74 @@ const commands = {
   },
 };
 
-const Cli = ({onClose}) => {
+const commandList = [
+  "Welcome to my portfolio CLI!",
+  "",
+  "Available commands:",
+  "  about    - Learn about me",
+  "  skills   - List my technical skills",
+  "  projects - Show my projects",
+  "  contact  - Get my contact info",
+  "  socials  - Show my social links",
+  "  resume   - View my resume",
+  "  ascii    - Random ASCII art",
+  "  clear    - Clear the terminal",
+];
+
+const asciiLines = welcomeAscii.split("\n");
+
+const introLines = [
+  { text: commandList[0], type: "typing", speed: 30 },
+  ...commandList.slice(1).map((line) => ({
+    text: line,
+    type: "fade",
+  })),
+  { text: "", type: "fade", delay: 200 },
+  ...asciiLines.map((line) => ({
+    text: line,
+    type: "fade",
+    color: "#00ff00",
+  })),
+];
+
+const Cli = ({ onClose }) => {
+  const [introDone, setIntroDone] = useState(false);
+
   return (
     <Macwindow onClose={onClose}>
       <div className="cli-window">
-        <Terminal
-          commands={commands}
-          welcomeMessage={[
-            "Welcome to my portfolio CLI!",
-            "",
-            "Available commands:",
-            "  about    - Learn about me",
-            "  skills   - List my technical skills",
-            "  projects - Show my projects",
-            "  contact  - Get my contact info",
-            "  socials  - Show my social links",
-            "  resume   - View my resume",
-            "  ascii    - Random ASCII art",
-            "  clear    - Clear the terminal",
-            "",
-            ...welcomeAscii.split("\n"),
-          ]}
-          messageStyle={{ color: "#00ff00" }}
-          promptLabel={"celestial:~$"}
-          promptLabelStyle={{ color: "#00ff00" }}
-          style={{ backgroundColor: "transparent" }}
-        />
+        <AnimatePresence mode="wait">
+          {!introDone ? (
+            <motion.div
+              key="intro"
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="cli-window__intro-wrap"
+            >
+              <TerminalIntro
+                lines={introLines}
+                onComplete={() => setIntroDone(true)}
+              />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="terminal"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.35 }}
+              style={{ height: "100%" }}
+            >
+              <Terminal
+                commands={commands}
+                welcomeMessage={commandList}
+                messageStyle={{ color: "#00ff00" }}
+                promptLabel={"celestial:~$"}
+                promptLabelStyle={{ color: "#00ff00" }}
+                style={{ backgroundColor: "transparent" }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </Macwindow>
   );
